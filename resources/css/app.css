@@ -1,0 +1,219 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-navy:       #1B2B6B;
+    --color-navy-dark:  #0F1A45;
+    --color-navy-light: #2D4080;
+    --color-gold:       #C9A840;
+    --color-gold-dark:  #A8882E;
+    --color-gold-light: #FBF3D5;
+}
+
+/* Desktop typography — scales all rem-based sizes proportionally, mobile untouched */
+@media (min-width: 1024px) {
+    html { font-size: 17px; }
+}
+@media (min-width: 1280px) {
+    html { font-size: 18px; }
+}
+
+/* Elegant dot-grid background for light content sections */
+.bg-dot-grid {
+    background-color: #f8fafc;
+    background-image: radial-gradient(circle, rgba(27, 43, 107, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* DM Serif Display for the hero headline */
+.hero-headline {
+    font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+}
+
+/* Metallic gold gradient text */
+.gold-metallic-text {
+    background: linear-gradient(135deg, #C9A840 0%, #FFE87C 30%, #F5D060 50%, #C9A840 70%, #A8882E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Metallic gold CTA button */
+.btn-gold-metallic {
+    background: linear-gradient(135deg, #A8882E 0%, #C9A840 25%, #FFE87C 50%, #C9A840 75%, #A8882E 100%);
+    color: #0F1A45;
+    border-radius: 0.75rem;
+    display: inline-block;
+    transition: filter 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+}
+.btn-gold-metallic:hover {
+    filter: brightness(0.87);
+    box-shadow: 0 6px 28px rgba(201, 168, 64, 0.5);
+}
+
+/* Hero background photo — subtle zoom on load */
+@keyframes heroZoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.05); }
+}
+.hero-bg {
+    animation: heroZoom 9s ease-out forwards;
+    will-change: transform;
+    background-size: cover;
+    background-position: center top;
+}
+
+/* Service pill chips inside hero */
+.service-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 1.05rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.78rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    text-decoration: none;
+}
+.service-chip:hover {
+    background: rgba(255, 255, 255, 0.95);
+    color: #1B2B6B;
+    border-color: transparent;
+}
+
+/* Admin sidebar */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+.sidebar-link.active {
+    background: rgba(201, 168, 64, 0.15);
+    color: #C9A840;
+    font-weight: 600;
+}
+.sidebar-link.active svg {
+    color: #C9A840;
+}
+.sidebar-link svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.45);
+    transition: color 0.15s;
+}
+.sidebar-link:hover svg {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Status badge — uniform width so Menunggu / Diluluskan / Ditolak line up */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 7rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    border: 1px solid transparent;
+}
+.status-badge .dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+/* Responsive tables — collapse into stacked cards on phones */
+@media (max-width: 640px) {
+    .stack-table { min-width: 0 !important; }
+    .stack-table thead { display: none; }
+    .stack-table tbody, .stack-table tr, .stack-table td { display: block; width: 100%; }
+    .stack-table tr { padding: 0.75rem 1.1rem; }
+    .stack-table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        text-align: right;
+        padding: 0.35rem 0 !important;
+    }
+    .stack-table td::before {
+        content: attr(data-label);
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #94a3b8;
+        text-align: left;
+        flex-shrink: 0;
+    }
+    .stack-table td:not([data-label])::before { content: none; }
+    .stack-table td.cell-title {
+        justify-content: flex-start;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #1e293b;
+        padding-bottom: 0.5rem !important;
+    }
+}
+
+/* ── Scroll reveal (fade + rise + snap-into-focus) ─────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.7s ease;
+    will-change: opacity, transform, filter;
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+}
+
+/* Count-up numbers use tabular figures so width doesn't jitter while ticking */
+.count-up {
+    font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+    .hero-bg {
+        animation: none;
+    }
+}
